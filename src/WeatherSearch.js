@@ -23,7 +23,7 @@ export default function WeatherSearch() {
   function handleSubmit(event) {
     event.preventDefault();
     let apiKey = "b0f53c0693e9322889a32ea02b229166";
-    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=imperial`;
     axios.get(apiUrl).then(displayWeather);
     console.log(apiUrl);
   }
@@ -33,26 +33,37 @@ export default function WeatherSearch() {
   }
 
   let form = (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="search"
-        placeholder="Search for a city..."
-        onChange={updateCity}
-      />
-      <button type="submit">Search</button>
-    </form>
+    <div className="form-wrapper">
+      <form onSubmit={handleSubmit}>
+        <div class="row mb-5">
+          <div class="col-9">
+            <input
+              type="search"
+              class="form-control"
+              placeholder="Search for a city..."
+              onChange={updateCity}
+            />
+          </div>
+          <div class="col-3">
+            <button type="submit" class="btn btn-secondary">
+              Search
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 
   if (loaded) {
     return (
       <div>
         {form}
-        <h2>{weather.name}</h2>
+        <h2 className="city-name">{weather.name}</h2>
         <ul>
-          <li>Temperature: {Math.round(weather.temperature)}°C</li>
-          <li>Description: {weather.description}</li>
+          <li className="temperature">{Math.round(weather.temperature)}°F</li>
+          <li className="description">{weather.description}</li>
           <li>Humidity: {weather.humidity}%</li>
-          <li>Wind: {weather.wind}km/hr</li>
+          <li>Wind: {weather.wind}m/hr</li>
           <li>
             <img src={weather.icon} alt={weather.description} />
           </li>

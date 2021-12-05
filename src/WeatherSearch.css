@@ -1,0 +1,20 @@
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  list-style: none;
+}
+
+.city-name {
+  font-size: 45px;
+}
+
+.temperature {
+  font-size: 45px;
+}
+
+.description {
+  text-transform: capitalize;
+}
